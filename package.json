@@ -1,0 +1,28 @@
+{
+  "name": "st-pete-map",
+  "version": "0.0.0",
+  "description": "A map showing things around SNI headquarters",
+  "main": "assets/js/main.js",
+  "scripts": {
+    "build": "browserify assets/js/main.js > assets/js/bundle.js",
+    "watch": "watchify assets/js/main.js -o assets/js/bundle.js",
+    "serve": "serve -p 5000",
+    "dev": "npm run serve & npm run watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JasonSanford/st-pete-map.git"
+  },
+  "keywords": [
+    "map"
+  ],
+  "author": "Jason Sanford",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JasonSanford/st-pete-map/issues"
+  },
+  "homepage": "https://github.com/JasonSanford/st-pete-map",
+  "dependencies": {
+    "xhr": "~1.17.0"
+  }
+}

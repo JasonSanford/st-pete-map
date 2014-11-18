@@ -1,0 +1,38 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Hollander Boutique Hotel",
+        "address": "421 4th Ave N, St Petersburg, FL, 33701",
+        "marker-symbol": "lodging",
+        "marker-color": "#23344c"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.6391317,
+          27.7768029
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Spatial Networks",
+        "address": "360 Central Avenue, Suite 200 St. Petersburg, FL 33701",
+        "marker-symbol": "star",
+        "marker-size": "large",
+        "marker-color": "#d85054"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.6381319,
+          27.770925
+        ]
+      }
+    }
+  ]
+}
