@@ -15,10 +15,18 @@ L.control.locate(locate_options).addTo(map);
 
 var geojson_layer_options = {
   pointToLayer: L.mapbox.marker.style,
+  style: {
+    color: "#ff7800",
+    weight: 4,
+    opacity: 0.8
+  },
   onEachFeature: function (feature, layer) {
     var html = '<h3>' + feature.properties.title + '</h3>';
     if (feature.properties.address) {
       html += '<p>'+ feature.properties.address + '</p>';
+    }
+    if (feature.properties.distance) {
+      html += '<p>'+ feature.properties.distance + ' mi.</p>';
     }
     layer.bindPopup(html);
   }
