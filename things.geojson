@@ -7,7 +7,7 @@
         "title": "Hollander Boutique Hotel",
         "address": "421 4th Ave N, St Petersburg, FL, 33701",
         "marker-symbol": "lodging",
-        "marker-color": "#23344c"
+        "marker-color": "#d85054"
       },
       "geometry": {
         "type": "Point",
@@ -23,7 +23,6 @@
         "title": "Spatial Networks",
         "address": "360 Central Avenue, Suite 200 St. Petersburg, FL 33701",
         "marker-symbol": "star",
-        "marker-size": "large",
         "marker-color": "#d85054"
       },
       "geometry": {
@@ -39,7 +38,10 @@
       "properties": {
         "title": "Snell Isle Route",
         "type": "route",
-        "distance": 6.6
+        "distance": 6.6,
+        "stroke-color": "#141D2B",
+        "stroke-width": 4,
+        "stroke-opacity": 1
       },
       "geometry": {
         "type": "LineString",

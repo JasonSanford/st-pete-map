@@ -46,11 +46,11 @@ var eat_drink_layer = new L.GeoJSON(null, {
   pointToLayer: function (feature, lat_lng) {
     var symbol = feature.properties.status === 'Bar' ? 'bar' : 'restaurant';
     return L.marker(lat_lng, {
-        icon: L.mapbox.marker.icon({
-            'marker-size': 'small',
-            'marker-symbol': symbol,
-            'marker-color': '#333'
-        })
+      icon: L.mapbox.marker.icon({
+        'marker-size': 'small',
+        'marker-symbol': symbol,
+        'marker-color': '#141D2B'
+      })
     });
   }
 });
@@ -58,11 +58,7 @@ L.control.layers(null, {'Eat/Drink': eat_drink_layer}).addTo(map);
 
 var geojson_layer_options = {
   pointToLayer: L.mapbox.marker.style,
-  style: {
-    color: "#ff7800",
-    weight: 4,
-    opacity: 0.8
-  },
+  style: L.mapbox.simplestyle.style,
   onEachFeature: function (feature, layer) {
     var html = '<h3>' + feature.properties.title + '</h3>';
     if (feature.properties.address) {
