@@ -1,6 +1,27 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var xhr = require('xhr');
 
+function addGeoJSON(url, layer, zoom_to) {
+  var xhr_options = {
+    uri:    url,
+    json:   true,
+    method: 'get'
+  };
+  function callback(error, resp, geojson) {
+    if (error) {
+      console.log(error);
+      return;
+    }
+    layer.addData(geojson);
+    if (zoom_to) {
+      setTimeout(function() {
+        map.fitBounds(layer.getBounds());
+      }, 500);
+    }
+  }
+  xhr(xhr_options, callback);
+}
+
 var map = new L.mapbox.Map('map-container', 'jcsanford.k8mii9c2', {
   infoControl: false,
   attributionControl: true,
@@ -13,6 +34,27 @@ var locate_options = {
   }
 };
 L.control.locate(locate_options).addTo(map);
+
+var eat_drink_layer = new L.GeoJSON(null, {
+  onEachFeature: function (feature, layer) {
+    var html = '<h3>' + feature.properties.name + '</h3>';
+    if (feature.properties.cuisines) {
+      html += '<p>'+ feature.properties.cuisines.split(',').join(', ') + '</p>';
+    }
+    layer.bindPopup(html);
+  },
+  pointToLayer: function (feature, lat_lng) {
+    var symbol = feature.properties.status === 'Bar' ? 'bar' : 'restaurant';
+    return L.marker(lat_lng, {
+        icon: L.mapbox.marker.icon({
+            'marker-size': 'small',
+            'marker-symbol': symbol,
+            'marker-color': '#333'
+        })
+    });
+  }
+});
+L.control.layers(null, {'Eat/Drink': eat_drink_layer}).addTo(map);
 
 var geojson_layer_options = {
   pointToLayer: L.mapbox.marker.style,
@@ -35,8 +77,12 @@ var geojson_layer_options = {
 var geojson_layer = new L.GeoJSON(null, geojson_layer_options);
 geojson_layer.addTo(map);
 
+addGeoJSON('things.geojson', geojson_layer, true);
+addGeoJSON('https://web.fulcrumapp.com/shares/81c7242d3cca922f.geojson', eat_drink_layer, false);
+/*
+var uri = 'https://web.fulcrumapp.com/shares/81c7242d3cca922f.geojson';
 var xhr_options = {
-  uri:    'things.geojson',
+  uri:    uri,
   json:   true,
   method: 'get'
 };
@@ -45,14 +91,10 @@ function callback(error, resp, geojson) {
     console.log(error);
     return;
   }
-  geojson_layer.addData(geojson);
-  setTimeout(function() {
-    map.fitBounds(geojson_layer.getBounds());
-  }, 500);
+  eat_drink_layer.addData(geojson);
 }
-
 xhr(xhr_options, callback);
-
+*/
 module.exports = {
   map: map
 };
