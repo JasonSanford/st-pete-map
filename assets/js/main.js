@@ -74,22 +74,3 @@ geojson_layer.addTo(map);
 
 addGeoJSON('things.geojson', geojson_layer, true);
 addGeoJSON('https://web.fulcrumapp.com/shares/81c7242d3cca922f.geojson', eat_drink_layer, false);
-/*
-var uri = 'https://web.fulcrumapp.com/shares/81c7242d3cca922f.geojson';
-var xhr_options = {
-  uri:    uri,
-  json:   true,
-  method: 'get'
-};
-function callback(error, resp, geojson) {
-  if (error) {
-    console.log(error);
-    return;
-  }
-  eat_drink_layer.addData(geojson);
-}
-xhr(xhr_options, callback);
-*/
-module.exports = {
-  map: map
-};
